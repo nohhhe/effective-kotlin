@@ -4,10 +4,10 @@ class CapturingSequence {
     val primes: Sequence<Int> = sequence {
         var numbers = generateSequence(2) { it + 1 }
 
-        //var prime: Int
+        var prime: Int
         while (true) {
-            val prime = numbers.first()
-            //prime = numbers.first()
+            //val prime = numbers.first()
+            prime = numbers.first()
             println(prime)
             yield(prime)
             numbers = numbers.drop(1).filter {

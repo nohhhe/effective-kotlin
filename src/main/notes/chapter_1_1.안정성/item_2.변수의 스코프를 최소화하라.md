@@ -121,8 +121,36 @@ val primes: Sequence<Int> = sequence {
 
 print(primes.take(10).toList()) // [2,3,5,6,7,8,9,10,11,12]
 ```
-️❓   
+
+
 prime 변수를 캡처했기 때문에 최종적인 prime 값으로만 필터링되어 prime이 2로 설정되어 있을 때 필터링된 4를 제외하면, drop만 동작하므로 그냥 연속된 숫자가 나온다.
+
+❗️설명이 잘못된 게 아닌가? 아래 동작 방식을 확인해보자
+
+#### 시퀀스 활용 예제 동작 방식
+1. first()로 numbers의 첫 번째 값을 가져온다.
+2. yield()로 첫 번째 prime 값(2)을 반환 및 중단한다.
+3. 두 번째 루프 때 first()를 만나면 중단된 부분부터 다시 실행된다.
+4. ❗️numbers를 drop(1)로 첫 번째 값을 제외하고 filter로 prime의 배수를 제외하는 부분을 numbers에 캡처링 한다.❗️
+5. first()로 numbers의 두 번째 값을 가져온다.
+6. yield()로 두 번째 prime 값(3)을 반환 및 중단한다.
+7. 세 번째 루프 때 first()를 만나면 중단된 부분부터 다시 실행된다.
+8. ❗️캡처링된 numbers를 기준으로 4번 동작을 반복한다. (즉, numbers.drop(1).filter { it % prime(2) != 0 }.drop(1).filter { it % prime(3) != 0 })❗️
+9. 이런 식으로 계속 반복된다.
+
+#### 캡처링 오류 동작 방식
+1. first()로 numbers의 첫 번째 값을 가져온다.
+2. yield()로 첫 번째 prime 값(2)을 반환 및 중단한다.
+3. 두 번째 루프 때 first()를 만나면 중단된 부분부터 다시 실행된다.
+4. numbers를 drop(1)로 첫 번째 값을 제외하고 filter로 prime의 배수를 제외하는 부분을 numbers에 캡처링 한다.
+5. first()로 numbers의 두 번째 값을 가져온다.
+6. yield()로 두 번째 prime 값(3)을 반환 및 중단한다.
+7. 세 번째 루프 때 first()를 만나면 중단된 부분부터 다시 실행된다.
+8. ❗️캡처링된 numbers를 기준으로 4번 동작을 반복하지만 prime 변수가 캡처링 되기 때문에 마지막 prime 값으로만 필터링 된다. (즉, numbers.drop(1).filter { it % prime(3) != 0 }.drop(1).filter { it % prime(3) != 0 })❗️
+9. 이런 식으로 계속 반복된다.
+
+#### 설명이 틀린 부분
+숫자 4는 prime이 3일 때 numbers.drop(1).filter { it % prime(3) != 0 }.drop(1).filter { it % prime(3) != 0 }으로 인해서 2번째 drop에 의해서 삭제가 되는 것이지 필터링되는 것은 아닌 것 같다.
 
 ### 정리
 1. 변수의 스코프는 최대한 좁게 만드는 것이 좋다.
