@@ -20,6 +20,7 @@ TDD(Test Driven Development)라는 접근 방식도 있다. TDD는 개발 전에
 * Red: 실패하는 테스트 코드를 먼저 작성
 * Green: 테스트 코드를 성공시키기 위한 실제 코드를 작성
 * Blue: 중복 코드 제거, 일반화 등의 리팩토링을 수행
+
 ![TDD 개발 주기](../../../main/resources/images/TDD%20개발%20주기.png)
 
 #### 단위 테스트 장점과 단점
