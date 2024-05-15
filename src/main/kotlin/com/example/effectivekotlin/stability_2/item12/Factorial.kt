@@ -1,8 +1,4 @@
-package com.example.effectivekotlin.stability_2.item11
-
-class Factorial {
-
-}
+package com.example.effectivekotlin.stability_2.item12
 
 fun Int.factorial(): Int = (1..this).product()
 
