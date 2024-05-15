@@ -6,5 +6,5 @@ fun Iterable<Int>.product(): Int =
     fold(1) { acc, i -> acc * i }
 
 fun main() {
-    println(10 * 6.factorial()) // 120
+    println(10 * 6.factorial()) // 7200
 }
