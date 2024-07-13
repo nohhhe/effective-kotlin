@@ -43,7 +43,7 @@ class GenericTypeVariance {
         list.add(42)
     }
 
-    class Box4<in T> {
+    /*class Box4<in T> {
         var value: T? = null // Type parameter T is declared as 'in' but occurs in 'invariant' position in type T?
 
         fun set(value: T) {
@@ -52,7 +52,7 @@ class GenericTypeVariance {
 
         fun get(): T = value // Type parameter T is declared as 'in' but occurs in 'invariant' position in type T?
             ?: error("Value not set")
-    }
+    }*/
 }
 
 fun main() {
@@ -75,8 +75,8 @@ fun main() {
     box.set(42) // Dog를 위한 공간이므로 문제 발생
     println(box.get())
 
-    val strs = mutableListOf<String>("A","B","C")
+    /*val strs = mutableListOf<String>("A","B","C")
     GenericTypeVariance().append(strs) // Type mismatch. Required:MutableList<Any> Found:MutableList<String>
     val str: String = strs[3]
-    print(str)
+    print(str)*/
 }
